@@ -20,7 +20,7 @@ const todoList = [
 
 <template>
   <header>
-    <h1>To do App</h1>
+    <h1><i class="bi bi-check2-square"></i>To do App</h1>
   </header>
   <main>
     <TodoList :todos="todoList" />
