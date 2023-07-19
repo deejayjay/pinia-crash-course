@@ -1,8 +1,29 @@
 <script setup>
+import TodoList from './components/TodoList.vue';
 
+const todoList = [
+  {
+    id: 1,
+    text: 'Learn Vue',
+    isCompleted: true
+  },
+  {
+    id: 2,
+    text: 'Build something awesome',
+    isCompleted: false
+  }
+];
+
+// Need to change this to use Pinia
+// import { storeToRefs } from 'pinia';
 </script>
 
 <template>
-  <h1>Hello World</h1>
+  <header>
+    <h1>To do App</h1>
+  </header>
+  <main>
+    <TodoList :todos="todoList" />
+  </main>
 </template>
 
