@@ -20,12 +20,14 @@ const { toggleTheme } = todoStore;
       </h1>
       <div class="theme-buttons">
         <button v-show="theme === 'dark'"
+                type="button"
                 class="theme-btn"
                 aria-label="Toggle to light mode"
                 @click="toggleTheme">
           <i class="bi bi-brightness-high-fill icon-sun"></i>
         </button>
         <button v-show="theme === 'light'"
+                type="button"
                 class="theme-btn"
                 aria-label="Toggle to dark mode"
                 @click="toggleTheme">
@@ -47,7 +49,7 @@ const { toggleTheme } = todoStore;
 }
 
 .app__wrapper.light {
-  background-color: #dbeafe;
+  background-color: #f8fafc;
 }
 
 .top-bar {

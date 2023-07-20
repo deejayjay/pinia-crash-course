@@ -41,6 +41,10 @@ function handleFilter(filterText) {
   overflow: hidden;
 }
 
+.light .filter__wrapper {
+  background-color: #cbd5e1;
+}
+
 .filter-btn {
   border: none;
   background-color: transparent;
@@ -57,8 +61,17 @@ function handleFilter(filterText) {
 }
 
 .all-btn.active {
-  background-color: #dbeafe;
+  background-color: #f8fafc;
   color: #0f172a;
+}
+
+.light .all-btn {
+  color: #0f172a;
+}
+
+.light .all-btn.active {
+  background-color: #0f172a;
+  color: #f8fafc;
 }
 
 .all-btn:hover {
@@ -68,6 +81,10 @@ function handleFilter(filterText) {
 
 .completed-btn {
   color: #10b981;
+}
+
+.light .completed-btn {
+  color: #059669;
 }
 
 .completed-btn:hover,

@@ -31,14 +31,28 @@ const props = defineProps({
   border: 1px solid #334155;
   border-left: none;
   border-radius: 0 8px 8px 0;
+  overflow: hidden;
+}
+
+.light .list-items {
+  border-color: #94a3b8;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
 }
 
 .list-item {
   padding: 1rem;
 }
 
+.light .list-item {
+  color: #1e293b;
+}
+
 .list-item:nth-child(even) {
   background-color: #33415562;
+}
+
+.light .list-item:nth-child(even) {
+  background-color: #94a3b862;
 }
 
 .list-item.not-completed {

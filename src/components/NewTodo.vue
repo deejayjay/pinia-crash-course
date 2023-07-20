@@ -56,7 +56,7 @@ function handleAddNewTodo() {
 .form-controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.25rem;
   position: relative;
   top: -0.25rem;
 }
@@ -66,6 +66,11 @@ function handleAddNewTodo() {
   font-weight: 300;
 }
 
+.light .form-label {
+  color: #1e293b;
+  font-weight: 400;
+}
+
 .form-control {
   flex: 1;
   padding: 0.5rem 1rem;
@@ -73,11 +78,19 @@ function handleAddNewTodo() {
   background-color: #33415562;
   border: 1px solid #334155;
   border-radius: 4px;
-  color: #fafafa;
+  color: #94a3b8;
+  outline: 1px solid transparent;
+  transition: outline-color 0.25s;
+}
+
+.light .form-control {
+  background-color: #cbd5e1;
+  border-color: #94a3b8;
+  color: #1e293b;
 }
 
 .form-control:focus-visible {
-  outline: 1px solid #2563eb;
+  outline-color: #64748b;
 }
 
 .add-btn {

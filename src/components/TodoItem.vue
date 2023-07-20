@@ -3,18 +3,21 @@
     <div class="todo__text">{{ todo.text }}</div>
     <div class="todo__actions">
       <button v-if="!todo.isCompleted"
+              type="button"
               class="todo__action completed-btn"
               aria-label="Mark as completed"
               @click="handleCompleted(todo.id)">
         <i class="bi bi-check-circle-fill"></i>
       </button>
       <button v-else
+              type="button"
               class="todo__action not-completed-btn"
               aria-label="Mark as not completed"
               @click="handleNotCompleted(todo.id)">
         <i class="bi bi-arrow-counterclockwise"></i>
       </button>
-      <button class="todo__action delete-btn"
+      <button type="button"
+              class="todo__action delete-btn"
               aria-label="Delete todo"
               @click="handleDelete(todo.id)">
         <i class="bi bi-trash3-fill"></i>
