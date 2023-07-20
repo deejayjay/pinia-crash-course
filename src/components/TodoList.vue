@@ -1,13 +1,10 @@
 <template>
-  <ul role="list"
-      class="list-items">
-    <li v-for="todo in todos"
-        role="listitem"
-        class="list-item"
-        :class="todo.isCompleted ? 'completed' : 'not-completed'">
+  <ul role="list" v-if="todos.length > 0" class="list-items">
+    <li v-for="todo in todos" role="listitem" class="list-item" :class="todo.isCompleted ? 'completed' : 'not-completed'">
       <TodoItem :todo="todo" />
     </li>
   </ul>
+  <p v-else class="no-todos">No todos yet!</p>
 </template>
 
 <script setup>
@@ -37,9 +34,9 @@ const props = defineProps({
   background-color: #33415562;
 }
 
-list-item:last-child {
+/* .list-item:last-child {
   padding-bottom: 1rem;
-}
+} */
 
 .list-item.not-completed {
   border-left: 6px solid #10b981;
@@ -48,5 +45,15 @@ list-item:last-child {
 .list-item.completed {
   text-decoration: line-through;
   border-left: 6px solid #be123c;
+}
+
+.no-todos {
+  padding: 3rem 1rem;
+  border: 1px dashed #334155;
+  border-radius: 8px;
+  text-align: center;
+  color: #334155;
+  font-style: italic;
+  margin-top: 1rem;
 }
 </style>

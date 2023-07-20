@@ -1,26 +1,14 @@
 <script setup>
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 
+import { useTodosStore } from '@/stores/todos';
 import TodoList from './components/TodoList.vue';
+import NewTodo from './components/NewTodo.vue';
 
-const todoList = [
-  {
-    id: 1,
-    text: 'Learn Vue',
-    isCompleted: true
-  },
-  {
-    id: 2,
-    text: 'Build something awesome',
-    isCompleted: false
-  },
-  {
-    id: 3,
-    text: 'Learn TypeScript',
-    isCompleted: true
-  }
-];
+const todoStore = useTodosStore();
 
+const { todos } = storeToRefs(todoStore);
 const theme = ref('dark');
 
 function toggleTheme() {
@@ -30,9 +18,6 @@ function toggleTheme() {
   }
   theme.value = 'light';
 }
-
-// Need to change this to use Pinia
-// import { storeToRefs } from 'pinia';
 </script>
 
 <template>
@@ -41,20 +26,17 @@ function toggleTheme() {
       <i class="bi bi-check2-square icon-todo"></i>ToDoodle
     </h1>
     <div class="theme-buttons">
-      <button v-show="theme === 'dark'"
-              class="theme-btn"
-              @click="toggleTheme">
+      <button v-show="theme === 'dark'" class="theme-btn" @click="toggleTheme">
         <i class="bi bi-brightness-high-fill icon-sun"></i>
       </button>
-      <button v-show="theme === 'light'"
-              class="theme-btn"
-              @click="toggleTheme">
+      <button v-show="theme === 'light'" class="theme-btn" @click="toggleTheme">
         <i class="bi bi-moon-stars-fill icon-moon"></i>
       </button>
     </div>
   </header>
   <main class="main">
-    <TodoList :todos="todoList" />
+    <NewTodo />
+    <TodoList :todos="todos" />
   </main>
 </template>
 
@@ -90,6 +72,8 @@ function toggleTheme() {
 
 .main {
   padding: 1rem;
+  width: min(100%, 1280px);
+  margin: 0 auto;
 }
 </style>
 
