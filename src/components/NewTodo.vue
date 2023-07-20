@@ -1,34 +1,69 @@
 <template>
-  <form class="form" @submit.prevent="handleAddNewTodo">
-    <div class="form-controls">
-      <input type="text" class="form-control" v-model="todoText">
-      <button class="add-btn">
-        <i class="bi bi-plus-square-fill"></i>
-      </button>
+  <form class="form"
+        @submit.prevent="handleAddNewTodo">
+    <div class="form-controls__wrapper">
+      <label for="todoText"
+             class="form-label">New Todo:</label>
+      <div class="form-controls">
+        <input type="text"
+               id="todoText"
+               class="form-control"
+               v-model="todoText">
+        <button type="submit"
+                class="add-btn"
+                aria-label="Add new todo">
+          <i class="bi bi-plus-square-fill"></i>
+        </button>
+      </div>
     </div>
   </form>
+  <hr class="divider">
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { useToast } from 'vue-toast-notification';
 
 import { useTodosStore } from '@/stores/todos';
 
 const { addNewTodo } = useTodosStore();
-
+const $toast = useToast();
+// override the global option
+const toastOptions = {
+  position: 'bottom',
+  duration: 2500
+}
 const todoText = ref('');
 
+// Add the new todo to the store and show a notification
 function handleAddNewTodo() {
+  if (todoText.value.trim() === '') {
+    $toast.error('Todo text cannot be empty', toastOptions);
+    return;
+  }
   addNewTodo(todoText.value);
+  $toast.success('Todo was added successfully', toastOptions);
   todoText.value = '';
 }
 </script>
 
 <style scoped>
+.form-control__wrapper {
+  margin-top: 1rem;
+  ;
+}
+
 .form-controls {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  position: relative;
+  top: -0.25rem;
+}
+
+.form-label {
+  color: #94a3b8;
+  font-weight: 300;
 }
 
 .form-control {
@@ -60,5 +95,10 @@ function handleAddNewTodo() {
 .add-btn:hover {
   cursor: pointer;
   color: #16a34a;
+}
+
+.divider {
+  border-color: #1e293b;
+  margin: 0.25rem 0 2rem;
 }
 </style>

@@ -1,14 +1,22 @@
 <template>
-  <ul role="list" v-if="todos.length > 0" class="list-items">
-    <li v-for="todo in todos" role="listitem" class="list-item" :class="todo.isCompleted ? 'completed' : 'not-completed'">
+  <TodoFilter />
+  <ul role="list"
+      v-if="todos.length > 0"
+      class="list-items">
+    <li v-for="todo in todos"
+        role="listitem"
+        class="list-item"
+        :class="todo.isCompleted ? 'completed' : 'not-completed'">
       <TodoItem :todo="todo" />
     </li>
   </ul>
-  <p v-else class="no-todos">No todos yet!</p>
+  <p v-else
+     class="no-todos">No todos yet!</p>
 </template>
 
 <script setup>
 import TodoItem from './TodoItem.vue';
+import TodoFilter from './TodoFilter.vue';
 
 const props = defineProps({
   todos: {
@@ -20,7 +28,6 @@ const props = defineProps({
 
 <style scoped>
 .list-items {
-  margin-top: 1rem;
   border: 1px solid #334155;
   border-left: none;
   border-radius: 0 8px 8px 0;
@@ -34,17 +41,13 @@ const props = defineProps({
   background-color: #33415562;
 }
 
-/* .list-item:last-child {
-  padding-bottom: 1rem;
-} */
-
 .list-item.not-completed {
-  border-left: 6px solid #10b981;
+  border-left: 6px solid #be123c;
 }
 
 .list-item.completed {
   text-decoration: line-through;
-  border-left: 6px solid #be123c;
+  border-left: 6px solid #10b981;
 }
 
 .no-todos {
@@ -54,6 +57,7 @@ const props = defineProps({
   text-align: center;
   color: #334155;
   font-style: italic;
-  margin-top: 1rem;
+  font-size: 1.25rem;
+
 }
 </style>

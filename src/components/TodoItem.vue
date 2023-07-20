@@ -2,13 +2,21 @@
   <div class="todo">
     <div class="todo__text">{{ todo.text }}</div>
     <div class="todo__actions">
-      <button v-if="!todo.isCompleted" class="todo__action completed-btn" @click="handleCompleted(todo.id)">
+      <button v-if="!todo.isCompleted"
+              class="todo__action completed-btn"
+              aria-label="Mark as completed"
+              @click="handleCompleted(todo.id)">
         <i class="bi bi-check-circle-fill"></i>
       </button>
-      <button v-else class="todo__action not-completed-btn" @click="handleNotCompleted(todo.id)">
+      <button v-else
+              class="todo__action not-completed-btn"
+              aria-label="Mark as not completed"
+              @click="handleNotCompleted(todo.id)">
         <i class="bi bi-arrow-counterclockwise"></i>
       </button>
-      <button class="todo__action delete-btn" @click="handleDelete(todo.id)">
+      <button class="todo__action delete-btn"
+              aria-label="Delete todo"
+              @click="handleDelete(todo.id)">
         <i class="bi bi-trash3-fill"></i>
       </button>
     </div>
@@ -16,9 +24,9 @@
 </template>
 
 <script setup>
-import { useTodosStore } from '@/stores/todos';
+import { useToast } from 'vue-toast-notification';
 
-const { deleteTodo } = useTodosStore();
+import { useTodosStore } from '@/stores/todos';
 
 const props = defineProps({
   todo: {
@@ -26,19 +34,31 @@ const props = defineProps({
     required: true
   }
 });
+const { deleteTodo, updateTodoStatus } = useTodosStore();
+const $toast = useToast();
+// override the global option
+const toastOptions = {
+  position: 'bottom',
+  duration: 2500
+}
 
 function handleCompleted(todoId) {
   console.log(`Todo ${todoId} was marked completed`);
   // Add logic to mark the ToDo as completed
+  updateTodoStatus(todoId, true);
+  $toast.success('Todo was marked as completed', toastOptions);
 }
 
 function handleNotCompleted(todoId) {
   console.log(`Todo ${todoId} was marked not completed`);
   // Add logic to mark the ToDo as not completed
+  updateTodoStatus(todoId, false);
+  $toast.success('Todo was marked as not completed', toastOptions);
 }
 
 function handleDelete(todoId) {
   deleteTodo(todoId);
+  $toast.success('Todo was deleted', toastOptions);
 }
 </script>
 

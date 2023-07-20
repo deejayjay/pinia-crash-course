@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import { useTodosStore } from '@/stores/todos';
@@ -8,39 +7,49 @@ import NewTodo from './components/NewTodo.vue';
 
 const todoStore = useTodosStore();
 
-const { todos } = storeToRefs(todoStore);
-const theme = ref('dark');
-
-function toggleTheme() {
-  if (theme.value === 'light') {
-    theme.value = 'dark';
-    return;
-  }
-  theme.value = 'light';
-}
+const { filteredTodos: todos, theme } = storeToRefs(todoStore);
+const { toggleTheme } = todoStore;
 </script>
 
 <template>
-  <header class="top-bar">
-    <h1 class="top-bar__title">
-      <i class="bi bi-check2-square icon-todo"></i>ToDoodle
-    </h1>
-    <div class="theme-buttons">
-      <button v-show="theme === 'dark'" class="theme-btn" @click="toggleTheme">
-        <i class="bi bi-brightness-high-fill icon-sun"></i>
-      </button>
-      <button v-show="theme === 'light'" class="theme-btn" @click="toggleTheme">
-        <i class="bi bi-moon-stars-fill icon-moon"></i>
-      </button>
-    </div>
-  </header>
-  <main class="main">
-    <NewTodo />
-    <TodoList :todos="todos" />
-  </main>
+  <div class="app__wrapper"
+       :class="theme === 'light' ? 'light' : ''">
+    <header class="top-bar">
+      <h1 class="top-bar__title">
+        <i class="bi bi-check2-square icon-todo"></i>ToDoodle
+      </h1>
+      <div class="theme-buttons">
+        <button v-show="theme === 'dark'"
+                class="theme-btn"
+                aria-label="Toggle to light mode"
+                @click="toggleTheme">
+          <i class="bi bi-brightness-high-fill icon-sun"></i>
+        </button>
+        <button v-show="theme === 'light'"
+                class="theme-btn"
+                aria-label="Toggle to dark mode"
+                @click="toggleTheme">
+          <i class="bi bi-moon-stars-fill icon-moon"></i>
+        </button>
+      </div>
+    </header>
+    <main class="main">
+      <NewTodo />
+      <TodoList :todos="todos" />
+    </main>
+  </div>
 </template>
 
 <style scoped>
+.app__wrapper {
+  min-height: 100vh;
+  background-color: #0f172a;
+}
+
+.app__wrapper.light {
+  background-color: #dbeafe;
+}
+
 .top-bar {
   background-color: #f43f5e;
   padding: 1rem;
